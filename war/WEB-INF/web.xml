@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xmlns="http://java.sun.com/xml/ns/javaee"
+xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
+	<servlet>
+		<servlet-name>Safex</servlet-name>
+		<servlet-class>edu.asu.cse546.SafeServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Safex</servlet-name>
+		<url-pattern>/safe</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>Safe</servlet-name>
+		<servlet-class>edu.asu.cse546.getOverview</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Safe</servlet-name>
+		<url-pattern>/getOverview</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>Near</servlet-name>
+		<servlet-class>edu.asu.cse546.getNearest</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Near</servlet-name>
+		<url-pattern>/getNearest</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>Time</servlet-name>
+		<servlet-class>edu.asu.cse546.getTimeData</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Time</servlet-name>
+		<url-pattern>/getTimeData</url-pattern>
+	</servlet-mapping>
+	
+
+	
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+	</welcome-file-list>
+</web-app>
