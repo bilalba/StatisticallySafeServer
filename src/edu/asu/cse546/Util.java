@@ -3,6 +3,7 @@ package edu.asu.cse546;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
@@ -11,9 +12,27 @@ public class Util {
 	static String[] types = {"Theft","Arrest","Other","Assault", "Burglary", "Robbery", "Arson","Vandalism","Shooting"};
 	static String url =  "jdbc:google:mysql://cobalt-mind-162219:us-central1:statisticallysafedb/UpdatedCrimeDB?user=root&amp;password=";
 	
+	
+	
+	// THIS CODE IS COPIED.
+	//http://stackoverflow.com/questions/7764671/java-jdbc-connection-status
+	public static boolean isDbConnected(Connection conn) {
+	    final String CHECK_SQL_QUERY = "SELECT 1";
+	    boolean isConnected = false;
+	    try {
+	        conn.prepareStatement(CHECK_SQL_QUERY);
+	        isConnected = true;
+	    } catch (Exception e) {
+	    	return false;
+	        // handle SQL error here!
+	    }
+	    return isConnected;
+	}
 	public static void initialize() {
-		if (conn != null)
-			return;
+		if (conn != null){
+			if (isDbConnected(conn))
+				return;
+		}	
 		try {
 			 conn = DriverManager.getConnection(url);
 		}catch(Exception e) {
@@ -22,7 +41,7 @@ public class Util {
 	}
 		
 	
-	public static int countInRadius(PrintWriter pr,float lat1, float lon1, float radius, String condition) {
+	public static int countInRadius(PrintWriter wr,float lat1, float lon1, float radius, String condition) {
 		initialize();
 		try {
 			Statement stmt = conn.createStatement();
@@ -36,7 +55,7 @@ public class Util {
 			rs.next();
 			return rs.getInt("rowcount");
 		} catch(Exception e) {
-			e.printStackTrace(pr);
+			e.printStackTrace(wr);
 			return -1;
 		}
 		
